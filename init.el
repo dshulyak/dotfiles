@@ -68,7 +68,15 @@
     tagedit
 
     ;; git integration
-    magit))
+    magit
+
+    company
+    flycheck
+    go-eldoc
+    company-go
+    go-projectile
+    neotree
+))
 
 ;; On OS X, an Emacs instance started from the graphical user
 ;; interface will have a different environment than a shell in a
@@ -131,15 +139,8 @@
 ;; For editing lisps
 (load "elisp-editing.el")
 
-;; Langauage-specific
-(load "setup-clojure.el")
-;; (load "setup-js.el")
-
 ;; Python environment configuration
 (load "setup-python.el")
 
 ;; Golang
 (load "setup-golang.el")
-
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)

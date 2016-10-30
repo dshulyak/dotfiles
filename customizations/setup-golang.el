@@ -16,5 +16,4 @@
 
 (eval-after-load 'go-mode
   '(progn
-    ;; Set $GOPATH
     (go-projectile-set-gopath)))
