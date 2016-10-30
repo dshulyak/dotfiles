@@ -2,6 +2,8 @@
 (require 'flycheck)
 (require 'go-eldoc)
 (require 'company-go)
+(require 'projectile)
+(require 'go-projectile)
 
 (add-hook 'before-save-hook 'gofmt-before-save)
 (setq-default gofmt-command "goimports")
@@ -11,3 +13,8 @@
                             (company-mode)))
 (add-hook 'go-mode-hook 'yas-minor-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
+
+(eval-after-load 'go-mode
+  '(progn
+    ;; Set $GOPATH
+    (go-projectile-set-gopath)))
