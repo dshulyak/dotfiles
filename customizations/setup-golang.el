@@ -17,3 +17,8 @@
   '(progn
     (go-projectile-set-gopath)
     (go-projectile-install-tools)))
+
+
+(defun go-install-package ()
+    (interactive)
+    (compile "go install -v ./"))
