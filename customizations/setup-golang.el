@@ -11,9 +11,9 @@
 (add-hook 'go-mode-hook (lambda ()
                             (set (make-local-variable 'company-backends) '(company-go))
                             (company-mode)))
-(add-hook 'go-mode-hook 'yas-minor-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
 
 (eval-after-load 'go-mode
   '(progn
-    (go-projectile-set-gopath)))
+    (go-projectile-set-gopath)
+    (go-projectile-install-tools)))

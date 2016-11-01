@@ -76,6 +76,7 @@
     company-go
     go-projectile
     neotree
+    go-scratch
 ))
 
 ;; On OS X, an Emacs instance started from the graphical user
@@ -138,9 +139,6 @@
 
 ;; For editing lisps
 (load "elisp-editing.el")
-
-;; Python environment configuration
-;;(load "setup-python.el")
 
 ;; Golang
 (load "setup-golang.el")
