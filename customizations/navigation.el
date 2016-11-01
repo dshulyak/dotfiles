@@ -58,8 +58,7 @@
 (global-set-key (kbd "M-x") 'smex)
 
 ;; projectile everywhere!
-(projectile-global-mode)
-
+(projectile-global-mode +1)
 
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)

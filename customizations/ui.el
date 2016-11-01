@@ -26,10 +26,9 @@
 ;; for a more technical explanation.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
-(load-theme 'zenburn t)
 
-;; use monaco font
-(set-default-font "monaco")
+
+;; use monaco fonts
 
 ;; increase font size for better readability
 (set-face-attribute 'default nil :height 180)
@@ -71,5 +70,8 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
+;; no menu bar
+(menu-bar-mode -1)
 
-
+;; no tool bar
+(tool-bar-mode -1)

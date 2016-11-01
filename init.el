@@ -140,7 +140,7 @@
 (load "elisp-editing.el")
 
 ;; Python environment configuration
-(load "setup-python.el")
+;;(load "setup-python.el")
 
 ;; Golang
 (load "setup-golang.el")
