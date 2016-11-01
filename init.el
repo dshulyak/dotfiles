@@ -77,6 +77,7 @@
     go-projectile
     neotree
     go-scratch
+    gotest
 ))
 
 ;; On OS X, an Emacs instance started from the graphical user
