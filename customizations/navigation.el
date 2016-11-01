@@ -60,5 +60,8 @@
 ;; projectile everywhere!
 (projectile-global-mode +1)
 
+;; Find files in projectile project on ctrl-p (like in sublime)
+(global-set-key (kbd "C-p") 'projectile-find-file)
+
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
