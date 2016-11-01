@@ -19,6 +19,13 @@
     (go-projectile-install-tools)))
 
 
-(defun go-install-package ()
+(defun go-install ()
     (interactive)
     (compile "go install -v ./"))
+
+(defun go-test ()
+  (interactive)
+  (compile "go test -v ./"))
+
+(global-set-key (kbd "C-c t") 'go-test)
+(global-set-key (kbd "C-c i")  'go-install)

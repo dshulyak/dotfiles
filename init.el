@@ -77,7 +77,6 @@
     go-projectile
     neotree
     go-scratch
-    gotest
 
     zenburn-theme
 ))
