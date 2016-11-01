@@ -27,5 +27,10 @@
   (interactive)
   (compile "go test -v ./"))
 
+(defun go-test-single ()
+  (interactive)
+  (compile (concat "go test -v ./ -run=" (thing-at-point 'word))))
+
 (global-set-key (kbd "C-c t") 'go-test)
 (global-set-key (kbd "C-c i")  'go-install)
+(global-set-key (kbd "C-c s") 'go-test-single)
