@@ -4,15 +4,13 @@
 
 ;; Define package repositories
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("tromey" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
-
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa-stb" . "https://stable.melpa.org/packages/")
+        ("melpa" . "https://melpa.org/packages/"))
+      tls-checktrust t
+      tls-program '("gnutls-cli --x509cafile %t -p %p %h")
+      gnutls-verify-error t)
 ;; (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 ;;                          ("marmalade" . "http://marmalade-repo.org/packages/")
 ;;                          ("melpa" . "http://melpa-stable.milkbox.net/packages/")))
@@ -33,70 +31,55 @@
 ;; manually with M-x package-install
 ;; Add in your own as you wish:
 (defvar my-packages
-  '(;; makes handling lisp expressions much, much easier
-    ;; Cheatsheet: http://www.emacswiki.org/emacs/PareditCheatsheet
-    paredit
+'(;; makes handling lisp expressions much, much easier
+  ;; Cheatsheet: http://www.emacswiki.org/emacs/PareditCheatsheet
+  paredit
 
-    ;; key bindings and code colorization for Clojure
-    ;; https://github.com/clojure-emacs/clojure-mode
-    clojure-mode
+  ;; allow ido usage in as many contexts as possible. see
+  ;; customizations/navigation.el line 23 for a description
+  ;; of ido
+  ido-ubiquitous
 
-    ;; extra syntax highlighting for clojure
-    clojure-mode-extra-font-locking
+  ;; Enhances M-x to allow easier execution of commands. Provides
+  ;; a filterable list of possible commands in the minibuffer
+  ;; http://www.emacswiki.org/emacs/Smex
+  smex
 
-    ;; integration with a Clojure REPL
-    ;; https://github.com/clojure-emacs/cider
-    cider
+  ;; project navigation
+  projectile
 
-    ;; allow ido usage in as many contexts as possible. see
-    ;; customizations/navigation.el line 23 for a description
-    ;; of ido
-    ido-ubiquitous
+  ;; colorful parenthesis matching
+  rainbow-delimiters
 
-    ;; Enhances M-x to allow easier execution of commands. Provides
-    ;; a filterable list of possible commands in the minibuffer
-    ;; http://www.emacswiki.org/emacs/Smex
-    smex
+  ;; edit html tags like sexps
+  tagedit
 
-    ;; project navigation
-    projectile
+  ;; git integration
+  magit
 
-    ;; colorful parenthesis matching
-    rainbow-delimiters
+  company
+  go-eldoc
+  company-go
+  go-projectile
+  neotree
+  go-scratch
 
-    ;; edit html tags like sexps
-    tagedit
+  zenburn-theme
 
-    ;; git integration
-    magit
+  exec-path-from-shell
 
-    company
-    flycheck
-    go-eldoc
-    company-go
-    go-projectile
-    neotree
-    go-scratch
-
-    zenburn-theme
-    evil
-
-    exec-path-from-shell
+  use-package
 ))
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 
-;; On OS X, an Emacs instance started from the graphical user
-;; interface will have a different environment than a shell in a
-;; terminal window, because OS X does not run a shell during the
-;; login. Obviously this will lead to unexpected results when
-;; calling external utilities like make from Emacs.
-;; This library works around this problem by copying important
-;; environment variables from the user's shell.
-;; https://github.com/purcell/exec-path-from-shell
-(if (eq system-type 'darwin)
-    (add-to-list 'my-packages 'exec-path-from-shell))
+(unless (require 'use-package nil t)
+  (if (not (yes-or-no-p (concat "Refresh packages, install use-package and"
+                                " other packages used by init file? ")))
+      (error "you need to install use-package first")
+    (package-refresh-contents)
+    (package-install 'use-package)
+    (require 'use-package)
+    (setq use-package-always-ensure t)))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -160,9 +143,11 @@
  '(custom-safe-themes
    (quote
     ("9e54a6ac0051987b4296e9276eecc5dfb67fdcd620191ee553f40a9b6d943e78" "4bf9b00abab609ecc2a405aa25cc5e1fb5829102cf13f05af6a7831d968c59de" "4e753673a37c71b07e3026be75dc6af3efbac5ce335f3707b7d6a110ecb636a3" default)))
+ '(org-agenda-files (quote ("~/edu.org" "~/videocoin.org")))
+ '(org-agenda-window-setup (quote current-window))
  '(package-selected-packages
    (quote
-    (zenburn-theme tagedit smex rainbow-delimiters paredit neotree magit ido-ubiquitous go-scratch go-projectile flycheck exec-path-from-shell evil company-go clojure-mode-extra-font-locking cider))))
+    (flycheck lsp-ui lsp-mode treemacs use-package protobuf-mode terraform-mode json-mode yaml-mode solidity-mode zenburn-theme tagedit smex rainbow-delimiters paredit neotree magit ido-ubiquitous go-scratch go-projectile exec-path-from-shell evil company-go clojure-mode-extra-font-locking cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

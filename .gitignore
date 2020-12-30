@@ -1,1 +1,11 @@
 *.el~
+*.eld
+.cache/
+session.*
+gotools/
+elpa/
+backups/
+transient/
+.*
+ido.last
+*.data
